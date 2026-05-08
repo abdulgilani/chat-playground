@@ -1,5 +1,7 @@
+import User from "../models/user.model.js";
+
 export const signup = (req, res) => {
-  res.send("Signup route");
+  
 };
 
 export const login = (req, res) => {
