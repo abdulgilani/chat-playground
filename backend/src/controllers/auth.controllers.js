@@ -24,13 +24,23 @@ export const signup = async (req, res) => {
     });
 
     if (newUser) {
+      generateToken(newUser._id, res);
+      await newUser.save();
 
+
+      res.status(201).json({
+        _id: newUser._id,
+        fullName: newUser.fulllName,
+        email: newUser.email,
+        profilePic: newUser.profilePic,
+      })
     } else {
       return res.status(400).json({ message: "Invalid user data" });
     }
 
   } catch (error) {
-
+    console.log("Error in signup controller: ", error);
+    res.status(500).json({ message: "Server error" });
   }
 };
 
