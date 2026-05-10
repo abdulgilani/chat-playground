@@ -2,6 +2,7 @@ import User from "../models/user.model.js";
 import { generateToken } from "../lib/utils.js";
 import bcrypt from "bcryptjs";
 
+
 export const signup = async (req, res) => {
   const { fullName, email, password } = req.body;
   // Logic for user signup
@@ -81,3 +82,20 @@ export const logout = (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
+
+export const updateProfile = async (req, res) => {
+  try{
+    const { profilePic } = req.body;
+    const userId = req.user._id;
+
+    if (!profilePic) {
+      return res.status(400).json({ message: "Profile picture is required" });
+    }
+
+    const uploadResponse = await cloudinary.uploader.upload(profilePic);
+    
+
+  } catch (error) {
+
+  }
+}
