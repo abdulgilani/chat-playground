@@ -20,7 +20,7 @@ const Navbar = () => {
               <div className="size-9 rounded-lg bg-primary/10 flex items-center justify-center">
                 <MessageSquare className="size-5 text-primary" />
               </div>
-              <h1 className="text-xl font-bold">Chat Visual</h1>
+              <h1 className="text-xl font-bold">Chat Playground</h1>
             </Link>
           </div>
 

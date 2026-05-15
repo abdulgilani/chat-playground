@@ -52,7 +52,7 @@ const SignUpPage = () => {
               </div>
               <h1 className="text-2xl font-bold mt-2">Create Account</h1>
               <p className="text-base-content/60">
-                Get started with your free account
+                Join with your free account
               </p>
             </div>
           </div>
@@ -158,8 +158,8 @@ const SignUpPage = () => {
 
       {/* right side */}
       <AuthImagePattern
-        title="Join our community"
-        subtitle="Connect with friends, share moments, and stay in touch with your loved ones."
+        title="Join our playground"
+        subtitle="Connect with friends, share moments, and have fun."
       />
     </div>
   );
