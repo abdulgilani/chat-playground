@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import AuthImagePattern from "../components/AuthImagePattern";
-import { MessageSquare, Mail, EyeOff, Eye, Loader2 } from "lucide-react";
+import { Sparkles, Mail, EyeOff, Eye, Loader2 } from "lucide-react";
 
 import { useAuthStore } from "../store/useAuthStore";
 
@@ -31,7 +31,7 @@ const LoginPage = () => {
                 className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20
               transition-colors"
               >
-                <MessageSquare className="w-6 h-6 text-primary" />
+                <Sparkles className="w-6 h-6 text-primary" />
               </div>
               <h1 className="text-2xl font-bold mt-2">Welcome Back</h1>
               <p className="text-base-content/60">
@@ -120,7 +120,7 @@ const LoginPage = () => {
         </div>
       </div>
 
-      {/* right side */}
+      {/* Right Side for Desktop */}
       <AuthImagePattern
         title="Welcome back to the plaground"
         subtitle="Sign in to continue your catch up with your peers."
