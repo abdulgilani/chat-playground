@@ -34,7 +34,9 @@ const LoginPage = () => {
                 <MessageSquare className="w-6 h-6 text-primary" />
               </div>
               <h1 className="text-2xl font-bold mt-2">Welcome Back</h1>
-              <p className="text-base-content/60">Sign in back to the playground</p>
+              <p className="text-base-content/60">
+                Sign in back to the playground
+              </p>
             </div>
           </div>
 
@@ -109,7 +111,7 @@ const LoginPage = () => {
 
           <div className="text-center">
             <p className="text-base-content/60">
-              Don&apos;t have an account?{" "}
+              Not a member of the playground already?{" "}
               <Link to="/signup" className="link link-primary">
                 Create account
               </Link>

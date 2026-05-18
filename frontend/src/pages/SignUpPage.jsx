@@ -52,7 +52,7 @@ const SignUpPage = () => {
               </div>
               <h1 className="text-2xl font-bold mt-2">Create Account</h1>
               <p className="text-base-content/60">
-                Join with your free account
+                Join the playground with your free account
               </p>
             </div>
           </div>
@@ -147,7 +147,7 @@ const SignUpPage = () => {
 
           <div className="text-center">
             <p className="text-base-content/60">
-              Already have an account?{" "}
+              Already in the playground?{" "}
               <Link to="/login" className="link link-primary">
                 Sign in
               </Link>
