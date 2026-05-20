@@ -7,7 +7,7 @@ export const useChatStore = create((set, get) => ({
   messages: [],
   selectedUser: null,
   isUserLoading: false,
-  isMessageLoading: false,
+  isMessagesLoading: false,
 
   getUsers: async () => {
     set({ isUserLoading: true });
@@ -22,7 +22,7 @@ export const useChatStore = create((set, get) => ({
   },
 
   getMessages: async (userId) => {
-    set({ isMessageLoading: false });
+    set({ isMessagesLoading: false });
     try {
       const res = await axiosInstance.get(`/messages/${userId}`);
       set({ messages: res.data });
@@ -31,7 +31,7 @@ export const useChatStore = create((set, get) => ({
         error?.response?.data?.message || "Failed at getting messages",
       );
     } finally {
-      set({ isMessageLoading: false });
+      set({ isMessagesLoading: false });
     }
   },
 
