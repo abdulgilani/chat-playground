@@ -1,5 +1,8 @@
 import { create } from "zustand";
 import { axiosInstance } from "../utils/axios";
+import { useAuthStore } from "./useAuthStore";
+import { decryptMessage } from "../utils/encryption";
+
 import toast from "react-hot-toast";
 
 export const useChatStore = create((set, get) => ({
@@ -25,7 +28,36 @@ export const useChatStore = create((set, get) => ({
     set({ isMessagesLoading: false });
     try {
       const res = await axiosInstance.get(`/messages/${userId}`);
-      set({ messages: res.data });
+
+      const decryptedMessage = res.data.map((message) => {
+        const decryptedMsg = { ...message };
+
+        if (decryptedMsg.text) {
+          try {
+            decryptedMsg.text = decryptMessage(decryptedMsg.text);
+          } catch (error) {
+            console.error(
+              "Failed to decrypt a text message: ",
+              message._id,
+              error,
+            );
+            decryptedMsg.text = "[Decryption Error]";
+          }
+        }
+
+        if (decryptedMsg.image) {
+          try {
+            decryptedMsg.image = decryptMessage(decryptedMsg.image);
+          } catch (error) {
+            console.error("Failed to decrypt an image: ", message._id, error);
+            decryptedMsg.image = null;
+          }
+        }
+
+        return decryptedMsg;
+      });
+
+      set({ messages: decryptedMessage });
     } catch (error) {
       toast.error(
         error?.response?.data?.message || "Failed at getting messages",
@@ -48,6 +80,28 @@ export const useChatStore = create((set, get) => ({
         error?.response?.data?.message || "Failed at sending a message",
       );
     }
+  },
+
+  subscribeToMessages: () => {
+    const { selectedUser } = get();
+    if (!selectedUser) return;
+
+    const socket = useAuthStore.getState().socket;
+
+    socket.on("newMessage", (newMessage) => {
+      const isMessageSentFromFromSelectedUser =
+        newMessage.senderId === selectedUser._id;
+      if (!isMessageSentFromFromSelectedUser) return;
+
+      set({
+        messages: [...get().messages, newMessage],
+      });
+    });
+  },
+
+  unsubscribeFromMessages: () => {
+    const socket = useAuthStore.getState().socket;
+    socket.off("newMessage");
   },
 
   setSelectedUser: (selectedUser) => set({ selectedUser }),

@@ -15,35 +15,45 @@ const ChatInput = () => {
     e.preventDefault();
     let encryptedText, encryptedImage;
 
-    if(!text.trim() && !image) return;
+    if (!text.trim() && !image) return;
 
     // Encrypt the message
-    if(text.trim()){
-      encryptedText = encryptMessage(text.trim());
+    if (text) {
+      try {
+        encryptedText = encryptMessage(text);
+      } catch (error) {
+        console.error("Failed to encrypt the text message: ", error);
+        encryptedText = "[Encryption Error]";
+      }
     }
 
     // Encrypt the image file
-    if(image) {
-      encryptedImage = encryptMessage(image);
+    if (image) {
+      try {
+        encryptedImage = encryptMessage(image);
+      } catch (error) {
+        console.error("Failed to encrypt the image: ", error);
+        encryptedImage = null;
+      }
     }
 
-    try{
+    try {
       await sendMessage({
         text: encryptedText,
-        image: encryptedImage
+        image: encryptedImage,
       });
 
       setText("");
       setImage(null);
-      if(fileInputRef.current) fileInputRef.current.value = "";
+      if (fileInputRef.current) fileInputRef.current.value = "";
     } catch (error) {
       console.error("Failed to send the message: ", error);
     }
-  }
+  };
 
   const handleImageChange = (e) => {
     const imageFile = e.target.files[0];
-    if(!imageFile.type.startsWith("/image")) {
+    if (!imageFile.type.startsWith("/image")) {
       toast.error("You must select an image file");
       return;
     }
@@ -52,20 +62,20 @@ const ChatInput = () => {
     reader.onloadend = () => {
       setImage(reader.result);
     };
-    reader.readAsDataURL(file);
-  }
+    reader.readAsDataURL(imageFile);
+  };
 
   const handleRemoveImage = () => {
     setImage(null);
     if (fileInputRef.current) fileInputRef.current.value = "";
-  }
-  
+  };
+
   return (
     <div className="p-4 w-full">
       {image && (
         <div className="mb-3 flex items-center gap-2">
           <div className="relative">
-            <img 
+            <img
               src={image}
               alt="Image Preview"
               className="w-20 h-20 object-cover rounded-lg border border-zinc-700"
@@ -76,7 +86,7 @@ const ChatInput = () => {
               flex items-center justify-center"
               type="button"
             >
-              <X className="size-3"/>
+              <X className="size-3" />
             </button>
           </div>
         </div>
@@ -84,19 +94,19 @@ const ChatInput = () => {
 
       <form onSubmit={handleSendMessage} className="flex items-center gap-2">
         <div className="flex-1 flex gap-2">
-          <input 
+          <input
             type="text"
             className="w-full input input-bordered rounded-lg input-sm sm:input-md"
             placeholder="Type a message..."
             value={text}
             onChange={(e) => setText(e.target.value)}
           />
-          <input 
-           type="file"
-           accept="image/*"
-           className="hidden"
-           ref={fileInputRef}
-           onChange={handleImageChange}
+          <input
+            type="file"
+            accept="image/*"
+            className="hidden"
+            ref={fileInputRef}
+            onChange={handleImageChange}
           />
 
           <button
@@ -115,7 +125,6 @@ const ChatInput = () => {
           <Send size={20} />
         </button>
       </form>
-
     </div>
   );
 };
