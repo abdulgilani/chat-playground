@@ -24,6 +24,8 @@ io.on("connection", (socket) => {
   const userId = socket.handshake.query.userId;
   if (userId) onlineSocketMap[userId] = socket.id;
 
+  io.emit("getOnlineUsers", Object.keys(onlineSocketMap));
+
   socket.on("disconnect", () => {
     console.log("A user is disconnected", socket.id);
     delete onlineSocketMap[userId];
