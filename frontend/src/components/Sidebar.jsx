@@ -46,7 +46,7 @@ const Sidebar = () => {
       </div>
 
       <div className="overflow-y-auto w-full py-3">
-        {filteredOnline.map((user) => {
+        {filteredOnline.map((user) => (
           <button
             key={user._id}
             onClick={() => setSelectedUser(user)}
@@ -73,8 +73,8 @@ const Sidebar = () => {
                 {onlineUsers.includes(user._id) ? "Online" : "Offline"}
               </div>
             </div>
-          </button>;
-        })}
+          </button>
+        ))}
 
         {filteredOnline.length === 0 && (
           <div className="text-center text-zinc-500 py-4">No online users</div>

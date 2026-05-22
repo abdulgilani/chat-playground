@@ -111,7 +111,7 @@ const ChatInput = () => {
 
           <button
             type="button"
-            className={`hidden sm:flex btn btn-circle ${image ? "text-emerald-500" : "text-zinc-500"}`}
+            className={`flex btn btn-circle h-8 w-8 min-h-0 sm:h-12 sm:w-12 ${image ? "text-emerald-500" : "text-zinc-500"}`}
             onClick={() => fileInputRef.current?.click()}
           >
             <Image size={20} />

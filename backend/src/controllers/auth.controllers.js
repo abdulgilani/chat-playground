@@ -6,6 +6,12 @@ export const signup = async (req, res) => {
   const { fullName, email, password } = req.body;
   // Logic for user signup
   try {
+    if (!fullName || !email || !password) {
+      return res
+        .status(400)
+        .json({ message: "All fields are required to sign up!" });
+    }
+
     if (password.length < 6) {
       return res
         .status(400)
@@ -31,7 +37,7 @@ export const signup = async (req, res) => {
 
       res.status(201).json({
         _id: newUser._id,
-        fullName: newUser.fulllName,
+        fullName: newUser.fullName,
         email: newUser.email,
         profilePic: newUser.profilePic,
       });

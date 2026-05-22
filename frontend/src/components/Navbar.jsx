@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useAuthStore } from "../store/useAuthStore.js";
-import { MessageSquare, Settings, User, LogOut } from "lucide-react";
+import { Sparkles, Settings, User, LogOut } from "lucide-react";
 
 const Navbar = () => {
   const { authUser, logout } = useAuthStore();
@@ -18,7 +18,7 @@ const Navbar = () => {
               className="flex items-center gap-2.5 hover:opacity-80 transition-all"
             >
               <div className="size-9 rounded-lg bg-primary/10 flex items-center justify-center">
-                <MessageSquare className="size-5 text-primary" />
+                <Sparkles className="size-5 text-primary" />
               </div>
               <h1 className="text-xl font-bold">Chat Playground</h1>
             </Link>
@@ -33,16 +33,18 @@ const Navbar = () => {
               <span className="hidden sm:inline">Settings</span>
             </Link>
 
-            {authUser ? (
-              <Link to={"/profile"} className="btn btn-sm gap-2">
-                <User className="size-4" />
-                <span className="hidden sm:inline">Profile</span>
-              </Link>
-            ) : (
-              <button onClick={logout} className="flex gap-2 items-center">
-                <LogOut className="size-5" />
-                <span className="hidden sm:inline">Logout</span>
-              </button>
+            {authUser && (
+              <>
+                <Link to={"/profile"} className="btn btn-sm gap-2">
+                  <User className="size-4" />
+                  <span className="hidden sm:inline">Profile</span>
+                </Link>
+
+                <button onClick={logout} className="flex gap-2 items-center">
+                  <LogOut className="size-5" />
+                  <span className="hidden sm:inline">Logout</span>
+                </button>
+              </>
             )}
           </div>
         </div>

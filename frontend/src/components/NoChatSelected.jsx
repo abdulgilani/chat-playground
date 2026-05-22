@@ -8,7 +8,7 @@ const NoChatSelected = () => {
         <div className="flex justify-center gap-4 mb-4">
           <div className="relative">
             <div className="w-16 h-16 rounded-2xl background-primary/10 flex items-center justify-center animate-bounce">
-              <Sparkles classname="size-8 text-primary" />
+              <Sparkles className="size-8 text-primary" />
             </div>
           </div>
         </div>
