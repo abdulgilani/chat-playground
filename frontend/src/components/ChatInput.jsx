@@ -1,4 +1,4 @@
-import { Image, Send, X } from "lucide-react";
+import { Image as ImageIcon, Send, X } from "lucide-react";
 import { useState, useRef } from "react";
 import { useChatStore } from "../store/useChatStore";
 import { encryptMessage } from "../utils/encryption";
@@ -53,7 +53,7 @@ const ChatInput = () => {
 
   const handleImageChange = (e) => {
     const imageFile = e.target.files[0];
-    if (!imageFile.type.startsWith("/image")) {
+    if (!imageFile.type.startsWith("image/")) {
       toast.error("You must select an image file");
       return;
     }
@@ -114,7 +114,7 @@ const ChatInput = () => {
             className={`flex btn btn-circle h-8 w-8 min-h-0 sm:h-12 sm:w-12 ${image ? "text-emerald-500" : "text-zinc-500"}`}
             onClick={() => fileInputRef.current?.click()}
           >
-            <Image size={20} />
+            <ImageIcon size={20} />
           </button>
         </div>
         <button

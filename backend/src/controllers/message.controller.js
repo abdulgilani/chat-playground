@@ -1,7 +1,5 @@
 import User from "../models/user.model.js";
 import Message from "../models/message.model.js";
-
-import cloudinary from "../lib/cloudinary.js";
 import { getRecieverSockedId, io } from "../lib/socket.js";
 
 export const getUsersForSidebar = async (req, res) => {
@@ -25,8 +23,8 @@ export const getMessages = async (req, res) => {
 
     const messages = await Message.find({
       $or: [
-        { senderId: myId, revieverId: userToChatId },
-        { senderId: userToChatId, revieverId: myId },
+        { senderId: myId, recieverId: userToChatId },
+        { senderId: userToChatId, recieverId: myId },
       ],
     });
 
@@ -41,19 +39,13 @@ export const sendMessage = async (req, res) => {
   try {
     const { text, image } = req.body;
     const { id: recieverId } = req.params;
-    const senderId = req.user_id;
-
-    let imageUrl = "";
-    if (image) {
-      const uploadedImage = await cloudinary.v2.uploader.upload(image);
-      imageUrl = uploadedImage.secure_url;
-    }
+    const senderId = req.user._id;
 
     const newMessage = new Message({
       senderId,
       recieverId,
       text,
-      image: imageUrl,
+      image,
     });
 
     const recieverSocketId = getRecieverSockedId(recieverId);

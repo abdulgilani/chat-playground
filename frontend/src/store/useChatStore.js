@@ -25,11 +25,11 @@ export const useChatStore = create((set, get) => ({
   },
 
   getMessages: async (userId) => {
-    set({ isMessagesLoading: false });
+    set({ isMessagesLoading: true });
     try {
       const res = await axiosInstance.get(`/messages/${userId}`);
 
-      const decryptedMessage = res.data.map((message) => {
+      const decryptedMessageList = res.data.map((message) => {
         const decryptedMsg = { ...message };
 
         if (decryptedMsg.text) {
@@ -57,7 +57,7 @@ export const useChatStore = create((set, get) => ({
         return decryptedMsg;
       });
 
-      set({ messages: decryptedMessage });
+      set({ messages: decryptedMessageList });
     } catch (error) {
       toast.error(
         error?.response?.data?.message || "Failed at getting messages",
@@ -70,11 +70,36 @@ export const useChatStore = create((set, get) => ({
   sendMessage: async (messageData) => {
     const { selectedUser, messages } = get();
     try {
-      const res = await axiosInstance.put(
+      const res = await axiosInstance.post(
         `/messages/send/${selectedUser._id}`,
         messageData,
       );
-      set({ messages: [...messages, res.data] });
+
+      const newMessage = { ...res.data };
+
+      if (newMessage.text) {
+        try {
+          newMessage.text = decryptMessage(newMessage.text);
+        } catch (error) {
+          console.error(
+            "Failed to decrypt a text message: ",
+            newMessage._id,
+            error,
+          );
+          newMessage.text = "[Decryption Error]";
+        }
+      }
+
+      if (newMessage.image) {
+        try {
+          newMessage.image = decryptMessage(newMessage.image);
+        } catch (error) {
+          console.error("Failed to decrypt an image: ", newMessage._id, error);
+          newMessage.image = null;
+        }
+      }
+
+      set({ messages: [...messages, newMessage] });
     } catch (error) {
       toast.error(
         error?.response?.data?.message || "Failed at sending a message",
@@ -105,4 +130,9 @@ export const useChatStore = create((set, get) => ({
   },
 
   setSelectedUser: (selectedUser) => set({ selectedUser }),
+
+  clearSelectedUser: () =>
+    set({
+      selectedUser: null,
+    }),
 }));

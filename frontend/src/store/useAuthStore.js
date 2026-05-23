@@ -3,6 +3,7 @@ import { io } from "socket.io-client";
 
 import { create } from "zustand";
 import { axiosInstance } from "../utils/axios.js";
+import { useChatStore } from "./useChatStore.js";
 
 const BASE_URL = "http://localhost:5000";
 
@@ -63,6 +64,7 @@ export const useAuthStore = create((set, get) => ({
       set({ authUser: null });
       toast.success("Logged out successfully!");
       get().disconnectSocket();
+      useChatStore.getState().clearSelectedUser();
     } catch (error) {
       toast.error(error.response?.data?.message || "Logout failed!");
     }
