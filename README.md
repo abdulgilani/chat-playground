@@ -19,12 +19,12 @@
 ## About the Project
 
 <picture>
+<source media="(min-width: 1280px) and (prefers-color-scheme: white)" srcset="./public/Desktop.png">
 <source media="(min-width: 1280px) and (prefers-color-scheme: dark)" srcset="./public/DarkDesktop.png">
-<source media="(min-width: 1280px)" srcset="./public/Desktop.png">
+<source media="(min-width: 768px) and (prefers-color-scheme: white)" srcset="./public/Tablet.png">
 <source media="(min-width: 768px) and (prefers-color-scheme: dark)" srcset="./public/DarkTablet.png">
-<source media="(min-width: 768px)" srcset="./public/Tablet.png">
-<source media="(prefers-color-scheme: dark)" srcset="./public/DarkMobile.png">
-<img alt="Chat Playground" src="./public/Mobile.png">
+<source media="(prefers-color-scheme: white)" srcset="./public/Mobile.png">
+<img alt="Chat Playground" src="./public/DarkMobile.png">
 </picture>
 
 I have built the real time chat app. The app can have different UI themes where the user feels comfortable with chatting. The user can send both texts and images to other users. Feel free to send the message or the meme that you like to Marc Spectre or Stephen Grant.
