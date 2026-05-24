@@ -27,7 +27,7 @@
 <img alt="Chat Playground" src="./public/Mobile.png">
 </picture>
 
-I have built the real time chat app. The app can have different UI themes where the user feels comfortable with chatting. The user can send both texts and images to other users.
+I have built the real time chat app. The app can have different UI themes where the user feels comfortable with chatting. The user can send both texts and images to other users. Feel free to send the message or the meme that you like to Marc Spectre or Steven Grant.
 
 ---
 
@@ -86,7 +86,11 @@ cp backend/.env.example backend/.env
 cp frontend/.env.example frontend/.env
 ```
 
-**_ Seed Fake Users To Make the UI Less Boring (Optional) _**
+<!-- prettier-ignore-start -->
+
+**Seed Fake Users To Make the UI Less Boring (Optional)**
+
+<!-- prettier-ignore-end -->
 
 ```
 node backend/src/seeds/user.seed.js
