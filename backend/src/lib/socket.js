@@ -7,7 +7,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: ["https://chat-playground-2mq9.onrender.com"],
+    origin: ["http://localhost:5173"],
   },
 });
 
