@@ -39,7 +39,7 @@ You can access the demo [here](https://chat-playground-rtaw.onrender.com)
 
 ## Tech Stacks
 
-- Frontend: React + TailwindCSS + DaisyUI
+- Frontend: React + TailwindCSS + DaisyUI + Zustand
 - Language: JavaScript
 - Backend: Node + Express
 - Image Upload: Cloudinary
