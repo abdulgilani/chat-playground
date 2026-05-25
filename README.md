@@ -21,9 +21,9 @@
 <picture>
 <source media="(min-width: 1280px) and (prefers-color-scheme: dark)" srcset="./public/DarkDesktop.png">
 <source media="(min-width: 1280px)" srcset="./public/Desktop.png">
-<source media="(min-width: 768px) and (prefers-color-scheme: dark)" srcset="./public/DarkTablet.png">
-<source media="(min-width: 768px)" srcset="./public/Tablet.png">
-<source media="(prefers-color-scheme: dark)" srcset="./public/DarkMobile.png">
+<source media="(min-width: 768px) and (max-width: 1279px) and (prefers-color-scheme: dark)" srcset="./public/DarkTablet.png">
+<source media="(min-width: 768px) and (max-width: 1279px)" srcset="./public/Tablet.png">
+<source media="(max-width: 767px) and (prefers-color-scheme: dark)" srcset="./public/DarkMobile.png">
 <img alt="Chat Playground" src="./public/Mobile.png">
 </picture>
 
